@@ -1,19 +1,24 @@
 install.packages("devtools")
+install.packages("devtools", lib="~/R/lib")
 library(devtools)
 devtools::use_rcpp()
+devtools::install_github("cran/rgdal")
+
 
 install.packages("RcppCCTZ") #for parseDatetime
 install.packages("ggplot2") 
 install.packages("spatstat")
 install.packages("RColorBrewer")
-install.packages("rgdal") #for loading and plotting geotiff
 install.packages("raster") #for loading and plotting geotiff
+install.packages("png")
+
+
 library(RcppCCTZ)
 library(ggplot2)
 library(spatstat)
 library(RColorBrewer)
-library(rgdal)
 library(raster)
+library(png)
 
 
 setwd("~/projects/stay-safe/heatmap-creation/")
@@ -68,4 +73,5 @@ pal_opaque <- norm_palette(5)
 plot(density(foo_ppp, 20), las=2,xlab="foo", ylab="bar", main=NULL)
 
 geotiff <- raster("../data/aerial-photo.geotiff")
-plot(geotiff)
+aerial_photo <- readPNG("../data/aerial-photo.png")
+plot(aerial_photo)
