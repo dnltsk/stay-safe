@@ -209,3 +209,25 @@ a:hover, a:focus, a:active {
 	top: .5em;
 	vertical-align: top;
 }
+section.resume-section {
+	max-width: inherit;
+	padding: 0 !important;
+}
+.plate {
+	height: 20vh;
+	padding-top: 1em;
+}
+.track {
+	border-bottom: .1em solid #fff;
+	height: 40vh;
+	margin-bottom: 1em;
+}
+.platform {
+	border-top: .1em solid #fff;
+	border-right: .02em dashed #ffffff60;
+	height: 40vh;
+}
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
