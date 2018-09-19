@@ -1,1 +1,3 @@
-data/
+data/*
+!data/aerial-photo.geotiff.tif
+!data/objectstream-subset.csv
