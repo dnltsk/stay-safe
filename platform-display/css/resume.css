@@ -193,3 +193,19 @@ a {
 a:hover, a:focus, a:active {
   color: #824027;
 }
+
+.sector {
+	border: .06em solid #fff;
+	border-radius: .15em;
+	font-size: 3em;
+	padding-right: .3em;
+}
+.sector:before {
+	content: 'Sektor';
+	font-size: .2em;
+	left: .5em;
+	margin-right: -1.5em;
+	position: relative;
+	top: .5em;
+	vertical-align: top;
+}
