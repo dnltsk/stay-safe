@@ -222,6 +222,13 @@ section.resume-section {
 	height: 40vh;
 	margin-bottom: 1em;
 }
+.train {
+	position: absolute;
+	top: 20vh;
+}
+.train img {
+	height: 13em;
+}
 .platform {
 	border-top: .1em solid #fff;
 	border-right: .02em dashed #ffffff60;
