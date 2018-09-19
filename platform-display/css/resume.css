@@ -234,6 +234,30 @@ section.resume-section {
 	border-right: .02em dashed #ffffff60;
 	height: 40vh;
 }
+.platform .fill0,.platform .fill1,.platform .fill2,.platform .fill3,.platform .fill4 {
+	background-size: 8em;
+	background-repeat: no-repeat;
+	background-position: center top;
+	width: auto;
+	height: 10em;
+	margin: 2em 0 0 0;
+	padding: 0;
+}
+.platform .fill0 {
+	background-image: url('../img/people0.svg');
+}
+.platform .fill1 {
+	background-image: url('../img/people1.svg');
+}
+.platform .fill2 {
+	background-image: url('../img/people2.svg');
+}
+.platform .fill3 {
+	background-image: url('../img/people3.svg');
+}
+.platform .fill4 {
+	background-image: url('../img/people4.svg');
+}
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
