@@ -2,3 +2,5 @@ data/*
 !data/aerial-photo.geotiff
 !data/aerial-photo.png
 !data/objectstream-subset.csv
+*.Rhistory
+
