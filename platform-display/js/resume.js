@@ -26,8 +26,9 @@
   });
 
 var minute = 0,
-	train = 0,
+	train = -1,
 	markerPosition = 67, // percent
+	platformNumber = 2,
 	animationSpeed = 1500, // milliseconds
 	platformData = [],
 	timetableData = [];
@@ -55,7 +56,7 @@ var minute = 0,
 	function loadTimetableData() {
 		$.ajax({
 			type: "GET",
-			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/timeTable.csv?v=2",
+			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/timeTable.csv?v=3",
 			dataType: "text",
 			success: function(data) {
 				timetableData = processData(data);
@@ -97,7 +98,12 @@ var minute = 0,
 	}
 
 	function animateTrainMiddleRight() {
-		train = 0;
+		train = -1;
+
+		$('.trainTime').html('');
+		$('.trainDestination').html('');
+		$('.trainLine').html('').removeClass().addClass('trainLine');
+
 		coverTrain();
 
 		$('.train').animate({
@@ -110,16 +116,22 @@ var minute = 0,
 		});
 	}
 
+	function getTimetableDatetime(ts) {
+		var fix = ts.split(' ')[0].split('.');
+		fix = fix[2] + '-' + fix[1] + '-' + fix[0] + 'T' + ts.split(' ')[1] + ':00+02:00';
+
+		return fix;
+	}
+
 	function getTimetableTrain() {
 		var now = new Date(platformData[minute].timestamp);
 
 		for (var i = 0; i < timetableData.length; ++i) {
 			var ts = timetableData[i].timestamp;
-			var fix = ts.split(' ')[0].split('.');
-			fix = fix[2] + '-' + fix[1] + '-' + fix[0] + 'T' + ts.split(' ')[1] + ':00Z';
-			var dt = new Date(fix);
+			var dt = new Date(getTimetableDatetime(ts));
 
-			if (dt >= now) {
+//			if ((dt >= now) && (platformNumber === platformData[minute].platform)) {
+			if ((dt >= now)) {
 				return i;
 			}
 		}
@@ -193,7 +205,7 @@ var minute = 0,
 		}
 
 		var currentTrain = getTimetableTrain();
-		if ((train !== 0) && (train !== currentTrain)) {
+		if ((train !== -1) && (train !== currentTrain)) {
 			animateTrainMiddleRight();
 		}
 
@@ -207,9 +219,16 @@ var minute = 0,
 	}
 
 	function fillTrain() {
-		var index, slot;
+		var index, slot, data;
 
 		train = getTimetableTrain();
+		data = timetableData[train];
+
+		var dt = new Date(getTimetableDatetime(timetableData[train].timestamp));
+
+		$('.trainTime').html(dt.getHours() + '.' + ('0' + dt.getMinutes()).slice(-2));
+		$('.trainDestination').html(timetableData[train].destination);
+		$('.trainLine').html(timetableData[train].line).removeClass().addClass('trainLine').addClass(timetableData[train].line);
 
 		for (var i = 0; i < 6; ++i) {
 			index = 0;

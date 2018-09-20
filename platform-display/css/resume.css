@@ -214,19 +214,68 @@ section.resume-section {
 	padding: 0 !important;
 }
 .plate {
-	height: 20vh;
-	padding-top: 1em;
+	height: 30vh;
+	padding-top: 12vh;
 }
 .track {
 	border-bottom: .1em solid #fff;
-	height: 40vh;
+	height: 30vh;
 	margin-bottom: 1em;
+}
+.header {
+	border-bottom: .1em solid #fff;
+	font-size: 2em;
+	height: 10vh;
+	left: 0;
+	padding: .3em .5em;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.header .trainDestination {
+	margin-left: 1em;
+}
+.header .trainLine {
+	background: none;
+	float: right;
+	margin: -.3em -.5em;
+	padding: .36em 1.5em;
+}
+.header .trainLine.S3 {
+	background: #0090d4;
+}
+.header .trainLine.S5 {
+	background: #58b4cd;
+}
+.header .trainLine.S6 {
+	background: #7b4896;
+}
+.header .trainLine.S7 {
+	background: #fdbf22;
+}
+.header .trainLine.S9 {
+	background: #00a141;
+}
+.header .trainLine.S11 {
+	background: #b8a2ce;
+}
+.header .trainLine.S12 {
+	background: #e32213;
+}
+.header .trainLine.S15 {
+	background: #ceb18d;
+}
+.header .trainLine.S16 {
+	background: #74bc75;
+}
+.header .trainLine.S21 {
+	background: #a2cbee;
 }
 .train {
 	margin-left: -110vw;
 	overflow: hidden;
 	position: absolute;
-	top: 20vh;
+	top: 30vh;
 	white-space: nowrap;
 	z-index: 1;	
 }
@@ -280,7 +329,7 @@ section.resume-section {
 	background-image: url('../img/people1.svg');
 }
 .platform.yellow {
-	background-color: #adeb00;
+	background-color: #ebeb00;
 }
 .platform.red {
 	background-color: #eb0000;
@@ -298,7 +347,7 @@ section.resume-section {
 	margin-left: 0vw;
 	overflow: hidden;
 	position: absolute;
-	top: 0vh;
+	top: 10vh;
 	white-space: nowrap;
 }
 .marker .top, .marker .bottom {
@@ -323,7 +372,7 @@ section.resume-section {
 .marker .line {
 	background: #eb0000;
 	border: .2em solid #2d327d;
-	height: 77.2vh;
+	height: 67.2vh;
 	margin: -.4vh 0 -.4vh 3.4vh;
 	width: .6em;
 }
