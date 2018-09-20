@@ -305,26 +305,26 @@ section.resume-section {
 	background: #eb0000;
 	border: .2em solid #2d327d;
 	border-radius: 5vh;
-	height: 10vh;
-	width: 10vh;
+	height: 8vh;
+	width: 8vh;
 }
 .marker .top::before, .marker .bottom::before {
 	content: '';
 	background-image: url('../img/people1.svg');
-	background-size: 6vh;
+	background-size: 5vh;
 	background-repeat: no-repeat;
 	background-position: center top;
-	line-height: 11.5vh;
-	padding: 4.6vh;
+	line-height: 9.2vh;
+	padding: 3.7vh;
 }
 .marker .top {
-	margin-top: 2vh;
+	margin-top: 3vh;
 }
 .marker .line {
 	background: #eb0000;
 	border: .2em solid #2d327d;
-	height: 75.2vh;
-	margin: -.4vh 0 -.4vh 4.3vh;
+	height: 77.2vh;
+	margin: -.4vh 0 -.4vh 3.4vh;
 	width: .6em;
 }
 .nopadding {
