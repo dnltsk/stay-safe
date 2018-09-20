@@ -226,8 +226,19 @@ section.resume-section {
 	position: absolute;
 	top: 20vh;
 }
-.train img {
-	height: 13em;
+.train .car, .train .locomotive {
+	background-image: url('../img/car.svg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center top;
+	display: inline-block;
+	height: 10em;
+	margin: 0;
+	padding: 0;
+	width: 13vw;
+}
+.train .locomotive {
+	background-image: url('../img/locomotive.svg');
 }
 .platform {
 	border-top: .1em solid #fff;
