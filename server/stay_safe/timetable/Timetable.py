@@ -32,7 +32,7 @@ class Timetable:
         self.init_lines()
 
     def update_location_referrals(self, announcements):
-        margin = 50
+        margin = 55
         sectors = ["A", "B", "C", "D", "E", "F"]
         for ann in announcements:
             arrival = ann.arrival
@@ -50,7 +50,7 @@ class Timetable:
                 # todo NA's in histograms
                 plat_busy = [int(x) if x != "NA" else margin for x in hist_occ.amounts.split(",")]
                 idx = 0
-                if max(plat_busy) - min(plat_busy) < 350:
+                if max(plat_busy) - min(plat_busy) < margin:
                     idx = random.sample(range(len(plat_busy)),1)[0]
                 else:
                     # todo: remove flickering
