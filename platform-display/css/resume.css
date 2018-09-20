@@ -200,6 +200,10 @@ a:hover, a:focus, a:active {
 	font-size: 3em;
 	padding-right: .3em;
 }
+.sector.selected {
+	background: #fff;
+	color: #2d327d;
+}
 .sector::before {
 	content: 'Sektor';
 	font-size: .2em;
@@ -344,6 +348,7 @@ section.resume-section {
 	background-image: url('../img/people4.svg');
 }
 .marker {
+	display: none;
 	margin-left: 0vw;
 	overflow: hidden;
 	position: absolute;

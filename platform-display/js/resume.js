@@ -25,11 +25,11 @@
     target: '#sideNav'
   });
 
-var minute = 0,
+var second = 0,
 	train = -1,
 	markerPosition = 67, // percent
 	platformNumber = 2,
-	animationSpeed = 1500, // milliseconds
+	animationSpeed = 100, // milliseconds
 	platformData = [],
 	timetableData = [];
 
@@ -44,7 +44,7 @@ var minute = 0,
 	function loadPlatformData() {
 		$.ajax({
 			type: "GET",
-			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/platformdata.csv?v=1",
+			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/platformdata.csv?v=2",
 			dataType: "text",
 			success: function(data) {
 				platformData = processData(data);
@@ -61,7 +61,7 @@ var minute = 0,
 			success: function(data) {
 				timetableData = processData(data);
 
-				minute = 0;
+				second = 0;
 				tick();
 
 				animateTrainLeftMiddle();
@@ -124,13 +124,13 @@ var minute = 0,
 	}
 
 	function getTimetableTrain() {
-		var now = new Date(platformData[minute].timestamp);
+		var now = new Date(platformData[second].timestamp);
 
 		for (var i = 0; i < timetableData.length; ++i) {
 			var ts = timetableData[i].timestamp;
 			var dt = new Date(getTimetableDatetime(ts));
 
-//			if ((dt >= now) && (platformNumber === platformData[minute].platform)) {
+//			if ((dt >= now) && (platformNumber === platformData[second].platform)) {
 			if ((dt >= now)) {
 				return i;
 			}
@@ -142,17 +142,17 @@ var minute = 0,
 	function getPlatformSlot(slot) {
 		switch (slot) {
 		case 0:
-			return platformData[minute].b2;
+			return platformData[second].b2;
 		case 1:
-			return platformData[minute].c1;
+			return platformData[second].c1;
 		case 2:
-			return platformData[minute].c2;
+			return platformData[second].c2;
 		case 3:
-			return platformData[minute].d1;
+			return platformData[second].d1;
 		case 4:
-			return platformData[minute].d2;
+			return platformData[second].d2;
 		case 5:
-			return platformData[minute].e1;
+			return platformData[second].e1;
 		}
 		return 0;
 	}
@@ -183,13 +183,13 @@ var minute = 0,
 			color = '';
 			slot = getPlatformSlot(i);
 
-			if (slot > 600) {
+			if (slot > 15) {
 				index = 4;
 				color = 'red';
-			} else if (slot > 400) {
+			} else if (slot > 10) {
 				index = 3;
 				color = 'yellow';
-			} else if (slot > 200) {
+			} else if (slot > 5) {
 				index = 2;
 			} else if (slot > 0) {
 				index = 1;
@@ -199,9 +199,9 @@ var minute = 0,
 			$('.resume-section .row div:nth-child(' + (i + 1) + ') .platform div').removeClass().addClass('fill' + index);
 		}
 
-		++minute;
-		if (minute >= 59) {
-			minute = 0;
+		++second;
+		if (second >= (60 * 60 - 1)) {
+			second = 0;
 		}
 
 		var currentTrain = getTimetableTrain();
