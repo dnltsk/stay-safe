@@ -58,7 +58,14 @@ function processData(allText) {
 	minute = 0;
 	platformData = lines;
 	tick();
+	animateTrainLeftMiddle();
 }
+
+	function animateTrainLeftMiddle() {
+		$('.train').animate({
+			marginLeft: '2vw'
+		}, 1000);
+	}
 
 	function getPlatformSlot(slot) {
 		switch (slot) {

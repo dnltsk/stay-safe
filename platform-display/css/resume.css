@@ -223,22 +223,28 @@ section.resume-section {
 	margin-bottom: 1em;
 }
 .train {
+	margin-left: -110vw;
+	overflow: hidden;
 	position: absolute;
 	top: 20vh;
+	white-space: nowrap;
 }
 .train .car, .train .locomotive {
 	background-image: url('../img/car.svg');
 	background-size: 100%;
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: 0 1vw;
 	display: inline-block;
 	height: 10em;
-	margin: 0;
+	margin: 0 -1vw;
 	padding: 0;
-	width: 13vw;
+	width: 17vw;
 }
 .train .locomotive {
 	background-image: url('../img/locomotive.svg');
+	background-position: 0 0;
+	margin: 0;
+	width: 12vw;
 }
 .platform {
 	border-top: .1em solid #fff;
