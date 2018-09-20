@@ -29,7 +29,7 @@ var second = 0,
 	train = -1,
 	markerPosition = 67, // percent
 	platformNumber = 2,
-	animationSpeed = 100, // milliseconds
+	animationSpeed = 50, // milliseconds
 	platformData = [],
 	timetableData = [];
 
