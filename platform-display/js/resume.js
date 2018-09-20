@@ -31,6 +31,7 @@ $(document).ready(function() {
 
 var minute = 0,
 	train = 0,
+	animationSpeed = 1500, // milliseconds
 	platformData = [],
 	timetableData = [];
 
@@ -187,7 +188,7 @@ var minute = 0,
 			animateTrainMiddleRight();
 		}
 
-		setTimeout(tick, 100);
+		setTimeout(tick, animationSpeed);
 	}
 
 	function coverTrain() {
