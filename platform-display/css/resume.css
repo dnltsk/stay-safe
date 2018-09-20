@@ -246,6 +246,18 @@ section.resume-section {
 	margin: 0;
 	width: 12vw;
 }
+.train .car.car0 {
+	background-image: url('../img/car0.svg');
+}
+.train .car.car1 {
+	background-image: url('../img/car1.svg');
+}
+.train .car.car2 {
+	background-image: url('../img/car2.svg');
+}
+.train .car.car3 {
+	background-image: url('../img/car3.svg');
+}
 .platform {
 	border-top: .1em solid #fff;
 	border-right: .02em dashed #ffffff60;
