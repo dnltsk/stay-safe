@@ -14,8 +14,8 @@
       <file leaf-file-name="Timetable.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/timetable/Timetable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-233">
-              <caret line="34" column="19" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+            <state relative-caret-position="243">
+              <caret line="45" column="22" lean-forward="true" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -289,11 +289,6 @@
           <url>file://$PROJECT_DIR$/web/RESTEngine.py</url>
           <line>81</line>
           <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/timetable/Timetable.py</url>
-          <line>53</line>
-          <option name="timeStamp" value="195" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="196" />
@@ -650,8 +645,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/timetable/Timetable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-233">
-          <caret line="34" column="19" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+        <state relative-caret-position="243">
+          <caret line="45" column="22" lean-forward="true" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
