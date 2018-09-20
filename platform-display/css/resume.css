@@ -200,7 +200,7 @@ a:hover, a:focus, a:active {
 	font-size: 3em;
 	padding-right: .3em;
 }
-.sector:before {
+.sector::before {
 	content: 'Sektor';
 	font-size: .2em;
 	left: .5em;
@@ -228,6 +228,7 @@ section.resume-section {
 	position: absolute;
 	top: 20vh;
 	white-space: nowrap;
+	z-index: 1;	
 }
 .train .car, .train .locomotive {
 	background-image: url('../img/car.svg');
@@ -278,6 +279,12 @@ section.resume-section {
 .platform .fill1 {
 	background-image: url('../img/people1.svg');
 }
+.platform.yellow {
+	background-color: #adeb00;
+}
+.platform.red {
+	background-color: #eb0000;
+}
 .platform .fill2 {
 	background-image: url('../img/people2.svg');
 }
@@ -286,6 +293,39 @@ section.resume-section {
 }
 .platform .fill4 {
 	background-image: url('../img/people4.svg');
+}
+.marker {
+	margin-left: 0vw;
+	overflow: hidden;
+	position: absolute;
+	top: 0vh;
+	white-space: nowrap;
+}
+.marker .top, .marker .bottom {
+	background: #eb0000;
+	border: .2em solid #2d327d;
+	border-radius: 5vh;
+	height: 10vh;
+	width: 10vh;
+}
+.marker .top::before, .marker .bottom::before {
+	content: '';
+	background-image: url('../img/people1.svg');
+	background-size: 6vh;
+	background-repeat: no-repeat;
+	background-position: center top;
+	line-height: 11.5vh;
+	padding: 4.6vh;
+}
+.marker .top {
+	margin-top: 2vh;
+}
+.marker .line {
+	background: #eb0000;
+	border: .2em solid #2d327d;
+	height: 75.2vh;
+	margin: -.4vh 0 -.4vh 4.3vh;
+	width: .6em;
 }
 .nopadding {
    padding: 0 !important;

@@ -25,15 +25,20 @@
     target: '#sideNav'
   });
 
-$(document).ready(function() {
-	loadPlatformData();
-});
-
 var minute = 0,
 	train = 0,
+	markerPosition = 67, // percent
 	animationSpeed = 1500, // milliseconds
 	platformData = [],
 	timetableData = [];
+
+	$(document).ready(function() {
+		$('.marker').css({
+			marginLeft: markerPosition + 'vw'
+		});
+
+		loadPlatformData();
+	});
 
 	function loadPlatformData() {
 		$.ajax({
@@ -159,22 +164,26 @@ var minute = 0,
 	}
 
 	function tick() {
-		var index, slot;
+		var index, slot, color;
 
 		for (var i = 0; i < 6; ++i) {
 			index = 0;
+			color = '';
 			slot = getPlatformSlot(i);
 
 			if (slot > 600) {
 				index = 4;
+				color = 'red';
 			} else if (slot > 400) {
 				index = 3;
+				color = 'yellow';
 			} else if (slot > 200) {
 				index = 2;
 			} else if (slot > 0) {
 				index = 1;
 			}
 
+			$('.resume-section .row div:nth-child(' + (i + 1) + ') .platform').removeClass().addClass('platform').addClass(color);
 			$('.resume-section .row div:nth-child(' + (i + 1) + ') .platform div').removeClass().addClass('fill' + index);
 		}
 
