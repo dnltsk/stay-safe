@@ -27,6 +27,7 @@
 
 var second = 0,
 	train = -1,
+	colorizeCars = true,
 	markerPosition = 67, // percent
 	platformNumber = 2,
 	animationSpeed = 50, // milliseconds
@@ -56,7 +57,7 @@ var second = 0,
 	function loadTimetableData() {
 		$.ajax({
 			type: "GET",
-			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/timeTable.csv?v=3",
+			url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/timeTable.csv?v=4",
 			dataType: "text",
 			success: function(data) {
 				timetableData = processData(data);
@@ -118,7 +119,7 @@ var second = 0,
 
 	function getTimetableDatetime(ts) {
 		var fix = ts.split(' ')[0].split('.');
-		fix = fix[2] + '-' + fix[1] + '-' + fix[0] + 'T' + ts.split(' ')[1] + ':00+02:00';
+		fix = fix[2] + '-' + fix[1] + '-' + fix[0] + 'T' + ts.split(' ')[1] + ':00Z';
 
 		return fix;
 	}
@@ -242,7 +243,9 @@ var second = 0,
 				index = 1;
 			}
 
-			$('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car').addClass('car' + index);
+			if (colorizeCars) {
+				$('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car').addClass('car' + index);
+			}
 		}
 	}
 })(jQuery); // End of use strict
