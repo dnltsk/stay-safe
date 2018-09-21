@@ -4,3 +4,8 @@ data/*
 !data/objectstream-subset.csv
 *.Rhistory
 
+/.idea/*
+/*.iml
+
+.RData
+.Rhistory
