@@ -11,8 +11,9 @@ RUN apk add --no-cache python3 && \
     pip3 install --upgrade pip setuptools && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache && \
-    make automake gcc g++ subversion python3-dev
+    apk add make automake gcc g++ subversion python3-dev && \
+    apk add sqlite socat && \
+    rm -r /root/.cache
 
 RUN mkdir /app
 COPY stay_safe/ /app
