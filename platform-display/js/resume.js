@@ -50,6 +50,9 @@ var second = 0,
 			success: function(data) {
 				platformData = processData(data);
 				loadTimetableData();
+			}, error: function() {
+				platformData = [];
+				loadTimetableData();
 			}
 		 });
 	}
@@ -61,6 +64,13 @@ var second = 0,
 			dataType: "text",
 			success: function(data) {
 				timetableData = processData(data);
+
+				second = 0;
+				tick();
+
+				animateTrainLeftMiddle();
+			}, error: function() {
+				timetableData = [];
 
 				second = 0;
 				tick();
@@ -93,7 +103,7 @@ var second = 0,
 	function animateTrainLeftMiddle() {
 		$('.train').animate({
 			marginLeft: '2vw'
-		}, 1000, function() {
+		}, 1500, function() {
 			fillTrain();
 		});
 	}
@@ -109,7 +119,7 @@ var second = 0,
 
 		$('.train').animate({
 			marginLeft: '100vw'
-		}, 1000, function() {
+		}, 1500, function() {
 			$('.train').css({
 				marginLeft: '-110vw'
 			});
@@ -125,6 +135,10 @@ var second = 0,
 	}
 
 	function getTimetableTrain() {
+		if (second >= platformData.length) {
+			return 0;
+		}
+
 		var now = new Date(platformData[second].timestamp);
 
 		for (var i = 0; i < timetableData.length; ++i) {
@@ -141,6 +155,10 @@ var second = 0,
 	}
 
 	function getPlatformSlot(slot) {
+		if (second >= platformData.length) {
+			return Math.floor((slot + 1) * 5 * Math.random());
+		}
+
 		switch (slot) {
 		case 0:
 			return platformData[second].b2;
@@ -159,6 +177,9 @@ var second = 0,
 	}
 
 	function getTimetableSlot(slot) {
+		if (train >= timetableData.length) {
+			return 0;
+		}
 		switch (slot) {
 		case 0:
 			return timetableData[train].car1;
@@ -208,28 +229,44 @@ var second = 0,
 		var currentTrain = getTimetableTrain();
 		if ((train !== -1) && (train !== currentTrain)) {
 			animateTrainMiddleRight();
+		} else if ((0 === platformData.length) && ((second % 60) === 0)) {
+			animateTrainMiddleRight();
 		}
 
 		setTimeout(tick, animationSpeed);
 	}
 
 	function coverTrain() {
-		for (var i = 0; i < 6; ++i) {
-			$('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car');
-		}
+		$('.resume-section .train .car').removeClass('override');
 	}
 
 	function fillTrain() {
 		var index, slot, data;
 
 		train = getTimetableTrain();
-		data = timetableData[train];
+		if (train >= timetableData.length) {
+			data = {
+				one: 1,
+				timestamp: '21.06.2018 08:01',
+				line: 'S3',
+				car1: 81,
+				car2: 79,
+				car3: 99,
+				car4: 22,
+				car5: 74,
+				car6: 70,
+				plattform: 4,
+				destination: 'Aarau'
+			};
+		} else {
+			data = timetableData[train];
+		}
 
-		var dt = new Date(getTimetableDatetime(timetableData[train].timestamp));
+		var dt = new Date(getTimetableDatetime(data.timestamp));
 
 		$('.trainTime').html(dt.getHours() + '.' + ('0' + dt.getMinutes()).slice(-2));
-		$('.trainDestination').html(timetableData[train].destination);
-		$('.trainLine').html(timetableData[train].line).removeClass().addClass('trainLine').addClass(timetableData[train].line);
+		$('.trainDestination').html(data.destination);
+		$('.trainLine').html(data.line).removeClass().addClass('trainLine').addClass(data.line);
 
 		for (var i = 0; i < 6; ++i) {
 			index = 0;
@@ -247,5 +284,6 @@ var second = 0,
 				$('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car').addClass('car' + index);
 			}
 		}
+		$('.resume-section .train .car').addClass('override');
 	}
 })(jQuery); // End of use strict

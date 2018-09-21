@@ -294,28 +294,45 @@ section.resume-section {
 	padding: 0;
 	width: 17vw;
 }
+.train .car::after {
+	content: '';
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: 0 1vw;
+	display: inline-block;
+	height: 10em;
+	opacity: 0;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	width: 17vw;
+}
+.train .car.override::after {
+	opacity: 1;
+}
 .train .locomotive {
 	background-image: url('../img/locomotive.svg');
 	background-position: 0 0;
 	margin: 0;
 	width: 12vw;
 }
-.train .car.car0 {
+.train .car.car0::after {
 	background-image: url('../img/car0.svg');
 }
-.train .car.car1 {
+.train .car.car1::after {
 	background-image: url('../img/car1.svg');
 }
-.train .car.car2 {
+.train .car.car2::after {
 	background-image: url('../img/car2.svg');
 }
-.train .car.car3 {
+.train .car.car3::after {
 	background-image: url('../img/car3.svg');
 }
 .platform {
 	border-top: .1em solid #fff;
 	border-right: .02em dashed #ffffff60;
 	height: 40vh;
+	transition: background-color 0.3s;
+	-webkit-transition: background-color 0.3s;
 }
 .platform .fill0,.platform .fill1,.platform .fill2,.platform .fill3,.platform .fill4 {
 	background-size: 8em;
