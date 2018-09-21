@@ -26,11 +26,12 @@
   });
 
 var second = 0,
+	secondSteps = 2,
 	train = -1,
 	colorizeCars = true,
 	markerPosition = 67, // percent
 	platformNumber = 2,
-	animationSpeed = 50, // milliseconds
+	animationSpeed = 100, // milliseconds
 	platformData = [],
 	timetableData = [];
 
@@ -221,7 +222,7 @@ var second = 0,
 			$('.resume-section .row div:nth-child(' + (i + 1) + ') .platform div').removeClass().addClass('fill' + index);
 		}
 
-		++second;
+		second += secondSteps;
 		if (second >= (60 * 60 - 1)) {
 			second = 0;
 		}
