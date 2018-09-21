@@ -43,16 +43,9 @@ pal_trans2 <- paste(pal_opaque,"50",sep = "")
 #
 # find max quantiles
 #
-hour <- 5
-minute <- 30
-from_minute <- str_pad(minute, 2, pad = "0")
-to_minute <- str_pad(minute+1, 2, pad = "0")
-from_time<- paste(hour, ":", from_minute, sep="")
-to_time<- paste(hour, ":", to_minute, sep="")
-print(paste("from", from_time, "to", to_time))
 
-from_timestamp <- paste("2018-06-21T",from_time,":00Z", sep="")
-to_timestamp <- paste("2018-06-21T",to_time,":00Z", sep="")
+from_timestamp <- "2018-06-21T16:19:50Z"
+to_timestamp <- "2018-06-21T16:20:00Z"
 filter_from <- parseDatetime(from_timestamp, "%Y-%m-%dT%H:%M:%SZ");
 filter_to <- parseDatetime(to_timestamp, "%Y-%m-%dT%H:%M:%SZ");    
 
@@ -68,13 +61,13 @@ col_breakes <- as.vector(quantile(Z, probs = (0:4)/4))
 #
 # filtering data
 #
-for (from_hour in 4:23){
+for (from_hour in 6:23){
   for (from_minute in 0:59){
     for (from_second in 0:5){
       
-      from_hour <- 0
-      from_minute <- 0
-      from_second <- 5
+      #from_hour <- 0
+      #from_minute <- 59
+      #from_second <- 5
       
       from_second <- from_second * 10
     
@@ -91,15 +84,15 @@ for (from_hour in 4:23){
         }
       }
       
-      from_hour <- str_pad(from_hour, 2, pad = "0")
-      to_hour <- str_pad(to_hour, 2, pad = "0")
-      from_minute <- str_pad(from_minute, 2, pad = "0")
-      to_minute <- str_pad(to_minute, 2, pad = "0")
-      from_second <- str_pad(from_second, 2, pad = "0")
-      to_second <- str_pad(to_second, 2, pad = "0")
+      from_hour_str <- str_pad(from_hour, 2, pad = "0")
+      to_hour_str <- str_pad(to_hour, 2, pad = "0")
+      from_minute_str <- str_pad(from_minute, 2, pad = "0")
+      to_minute_str <- str_pad(to_minute, 2, pad = "0")
+      from_second_str <- str_pad(from_second, 2, pad = "0")
+      to_second_str <- str_pad(to_second, 2, pad = "0")
       
-      from_time<- paste(from_hour, ":", from_minute, ":", from_second, sep="")
-      to_time<- paste(to_hour, ":", to_minute, ":", to_second, sep="")
+      from_time<- paste(from_hour_str, ":", from_minute_str, ":", from_second_str, sep="")
+      to_time<- paste(to_hour_str, ":", to_minute_str, ":", to_second_str, sep="")
       
       print(paste("from", from_time, "to", to_time))
       
@@ -122,6 +115,7 @@ for (from_hour in 4:23){
       
       par(mar=c(0,0,1.5,0))
       if(nrow(data_subset) == 0){
+        next
         plot(P, 
              #col = pal_opaque,
              breaks = col_breakes,
