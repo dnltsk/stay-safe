@@ -7,5 +7,5 @@ data/*
 /.idea/*
 /*.iml
 
-#.RData
+.RData
 .Rhistory

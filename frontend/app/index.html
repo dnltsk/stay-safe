@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- The first thing in any HTML file should be the charset -->
+  <meta charset="utf-8">
+  <!-- Make the page mobile compatible -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>SBB</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Display a message if JS has been disabled on the browser. -->
+  <noscript>If you're seeing this message, that means <strong>JavaScript has been disabled on your browser</strong>, please <strong>enable JS</strong> to make this app work.</noscript>
+
+  <!-- The app hooks into this div -->
+  <div id="app"></div>
+  <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically includes all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this HTML file. Don't add any assets here! (Check out webpackconfig.js if you want to know more) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" charset="utf-8"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+  (function($) {
+    var second = 0,
+    train = -1,
+    colorizeCars = true,
+    markerPosition = 67, // percent
+    platformNumber = 2,
+    animationSpeed = 50, // milliseconds
+    platformData = [],
+    timetableData = [];
+
+    $(document).ready(function() {
+      $('.marker').css({
+        marginLeft: markerPosition + 'vw'
+      });
+
+      loadPlatformData();
+    });
+
+    function loadPlatformData() {
+      $.ajax({
+        type: "GET",
+        url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/platformdata.csv?v=2",
+        dataType: "text",
+        success: function(data) {
+          platformData = processData(data);
+          loadTimetableData();
+        }
+      });
+    }
+
+    function loadTimetableData() {
+      $.ajax({
+        type: "GET",
+        url: "https://raw.githubusercontent.com/dnltsk/stay-safe/master/platform-display/datas/timeTable.csv?v=4",
+        dataType: "text",
+        success: function(data) {
+          timetableData = processData(data);
+
+          second = 0;
+          tick();
+
+          animateTrainLeftMiddle();
+        }
+      });
+    }
+
+    function processData(allText) {
+      var allTextLines = allText.split(/\r\n|\n/);
+      var headers = allTextLines[0].split(',');
+      var lines = [];
+
+      for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+
+          var tarr = [];
+          for (var j=0; j<headers.length; j++) {
+            tarr[headers[j]] = data[j];
+          }
+          lines.push(tarr);
+        }
+      }
+
+      return lines;
+    }
+
+    function animateTrainLeftMiddle() {
+      $('.train').animate({
+        marginLeft: '2vw'
+      }, 1000, function() {
+        fillTrain();
+      });
+    }
+
+    function animateTrainMiddleRight() {
+      train = -1;
+
+      $('.trainTime').html('');
+      $('.trainDestination').html('');
+      $('.trainLine').html('').removeClass().addClass('trainLine');
+
+      coverTrain();
+
+      $('.train').animate({
+        marginLeft: '100vw'
+      }, 1000, function() {
+        $('.train').css({
+          marginLeft: '-110vw'
+        });
+        animateTrainLeftMiddle();
+      });
+    }
+
+    function getTimetableDatetime(ts) {
+      var fix = ts.split(' ')[0].split('.');
+      fix = fix[2] + '-' + fix[1] + '-' + fix[0] + 'T' + ts.split(' ')[1] + ':00Z';
+
+      return fix;
+    }
+
+    function getTimetableTrain() {
+      var now = new Date(platformData[second].timestamp);
+
+      for (var i = 0; i < timetableData.length; ++i) {
+        var ts = timetableData[i].timestamp;
+        var dt = new Date(getTimetableDatetime(ts));
+
+        //			if ((dt >= now) && (platformNumber === platformData[second].platform)) {
+        if ((dt >= now)) {
+          return i;
+        }
+      }
+
+      return 0;
+    }
+
+    function getPlatformSlot(slot) {
+      switch (slot) {
+        case 0:
+        return platformData[second].b2;
+        case 1:
+        return platformData[second].c1;
+        case 2:
+        return platformData[second].c2;
+        case 3:
+        return platformData[second].d1;
+        case 4:
+        return platformData[second].d2;
+        case 5:
+        return platformData[second].e1;
+      }
+      return 0;
+    }
+
+    function getTimetableSlot(slot) {
+      switch (slot) {
+        case 0:
+        return timetableData[train].car1;
+        case 1:
+        return timetableData[train].car2;
+        case 2:
+        return timetableData[train].car3;
+        case 3:
+        return timetableData[train].car4;
+        case 4:
+        return timetableData[train].car5;
+        case 5:
+        return timetableData[train].car6;
+      }
+      return 0;
+    }
+
+    function tick() {
+      var index, slot, color;
+
+      for (var i = 0; i < 6; ++i) {
+        index = 0;
+        color = '';
+        slot = getPlatformSlot(i);
+
+        if (slot > 15) {
+          index = 4;
+          color = 'red';
+        } else if (slot > 10) {
+          index = 3;
+          color = 'yellow';
+        } else if (slot > 5) {
+          index = 2;
+        } else if (slot > 0) {
+          index = 1;
+        }
+
+        $('.resume-section .row div:nth-child(' + (i + 1) + ') .platform').removeClass().addClass('platform').addClass(color);
+        $('.resume-section .row div:nth-child(' + (i + 1) + ') .platform div').removeClass().addClass('fill' + index);
+      }
+
+      ++second;
+      if (second >= (60 * 60 - 1)) {
+        second = 0;
+      }
+
+      var currentTrain = getTimetableTrain();
+      if ((train !== -1) && (train !== currentTrain)) {
+        animateTrainMiddleRight();
+      }
+
+      setTimeout(tick, animationSpeed);
+    }
+
+    function coverTrain() {
+      for (var i = 0; i < 6; ++i) {
+        $('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car');
+      }
+    }
+
+    function fillTrain() {
+      var index, slot, data;
+
+      train = getTimetableTrain();
+      data = timetableData[train];
+
+      var dt = new Date(getTimetableDatetime(timetableData[train].timestamp));
+
+      $('.trainTime').html(dt.getHours() + '.' + ('0' + dt.getMinutes()).slice(-2));
+      $('.trainDestination').html(timetableData[train].destination);
+      $('.trainLine').html(timetableData[train].line).removeClass().addClass('trainLine').addClass(timetableData[train].line);
+
+      for (var i = 0; i < 6; ++i) {
+        index = 0;
+        slot = getTimetableSlot(i);
+
+        if (slot > 100) {
+          index = 3;
+        } else if (slot > 50) {
+          index = 2;
+        } else if (slot > 0) {
+          index = 1;
+        }
+
+        if (colorizeCars) {
+          $('.resume-section .train .car:nth-child(' + (i + 1) + ')').removeClass().addClass('car').addClass('car' + index);
+        }
+      }
+    }
+  })(jQuery);
+</script>
+</body>
+</html>

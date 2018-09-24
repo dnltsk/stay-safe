@@ -1,0 +1,13 @@
+$light-gray: #d8d8d8;
+
+.navbar {
+  height: 64px;
+  // border-bottom: $light-gray 1px solid;
+  background: #00175f;
+  position: fixed;
+  padding: 0;
+
+  &__logo {
+    height: 100%;
+  }
+}

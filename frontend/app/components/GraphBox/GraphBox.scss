@@ -1,0 +1,12 @@
+.graphbox {
+  flex: 1 1 0;
+  padding: 16px 0;
+
+  &__card {
+    background: white;
+    height: 100%;
+    border: 1px solid #d8d8d9;
+    border-radius: 4px;
+    padding: 16px 32px;
+  }
+}
