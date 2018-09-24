@@ -4,6 +4,8 @@ data/*
 !data/objectstream-subset.csv
 *.Rhistory
 
+/package-lock.json
+
 /.idea/*
 /*.iml
 
